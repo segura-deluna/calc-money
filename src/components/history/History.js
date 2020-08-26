@@ -1,11 +1,13 @@
 import React from 'react';
 import HistoryItem from './HistoryItem';
 
-const History = () => (
+const History = ({ transactions }) => (
 	<section className="history">
 		<h3>история расходов</h3>
 		<ul className="history__list">
-			<HistoryItem />
+			{transactions.map(item =>
+				<HistoryItem key={item.id} transaction={item} />
+			)}
 		</ul>
 	</section>
 );

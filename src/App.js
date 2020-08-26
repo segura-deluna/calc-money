@@ -12,21 +12,33 @@ class App extends Component {
 	}
 
 	addTransaction = add => {
-		const transaction = {
+
+		const transactions = [...this.state.transactions,
+		{
 			id: `cmr${(+new Date).toString(16)}`,
 			description: this.state.description,
 			amount: this.state.amount,
 			add
 		}
+		];
+
+		this.setState({
+			transactions,
+			description: '',
+			amount: '',
+		});
 	}
+
 
 	addAmount = e => {
 		this.setState({ amount: e.target.value });
 	}
 
+
 	addDescription = e => {
 		this.setState({ description: e.target.value });
 	}
+
 
 	render() {
 		return (
@@ -39,11 +51,13 @@ class App extends Component {
 				<main>
 					<div className="container">
 						<Total />
-						<History />
+						<History transactions={this.state.transactions} />
 						<Operation
 							addTransaction={this.addTransaction}
 							addAmount={this.addAmount}
 							addDescription={this.addDescription}
+							description={this.state.description}
+							amount={this.state.amount}
 						/>
 					</div>
 				</main>
